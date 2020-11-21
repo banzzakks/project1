@@ -1,0 +1,45 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: spring-web
+  namespace: default
+  labels:
+    app: springboot-web 
+spec: 
+  replicas: 1 
+  selector: 
+    matchLabels: 
+      app: springboot-web 
+  strategy:
+    type: RollingUpdate
+  template: 
+    metadata: 
+      labels: 
+        app: springboot-web 
+    spec: 
+      containers: 
+        - name: springboot-web 
+          image: 1223yys/springboot-web:0.2.5 
+          volumeMounts:
+          - mountPath: /var/log
+            name: logs
+          ports: 
+            - containerPort: 80 
+          livenessProbe: 
+            httpGet: 
+              port: 80 
+              path: / 
+            initialDelaySeconds: 60
+          readinessProbe: 
+            httpGet: 
+              port: 80 
+              path: / 
+            initialDelaySeconds: 60
+            periodSeconds: 10
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: logs
+          hostPath:
+            path: /logs
+            type: DirectoryOrCreate
+

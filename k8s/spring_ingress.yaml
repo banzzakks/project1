@@ -1,0 +1,17 @@
+apiVersion: apps/v1 
+kind: Ingress 
+metadata: 
+  name: springboot-web
+  namespace: default
+  labels:
+    app: springboot-web 
+spec: 
+  rules: 
+  - host: kakaopay.local.com 
+    http: 
+      paths: 
+      - path: / 
+        backend: 
+          serviceName: springboot-web-service 
+          servicePort: 80
+

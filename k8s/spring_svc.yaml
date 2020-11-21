@@ -1,0 +1,15 @@
+apiVersion: apps/v1 
+kind: Service 
+metadata: 
+  name: springboot-web-service 
+  namespace: default
+  labels:
+    app: springboot-web 
+spec: 
+  selector: 
+    app: springboot-web 
+  ports: 
+    - name: http 
+      port: 80 
+      targetPort: 80
+

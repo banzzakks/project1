@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'org.springframework.samples'
+version = '2.3.0.BUILD-SNAPSHOT'
+
+description = """petclinic"""
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+
+
+repositories {
+     mavenCentral()
+     maven { url "https://repo.spring.io/snapshot" }
+     maven { url "https://repo.spring.io/milestone" }
+     maven { url "https://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    runtimeOnly 'mysql:mysql-connector-java'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version:'2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version:'2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version:'2.3.5.RELEASE'
+    compile group: 'javax.cache', name: 'cache-api', version:'1.1.1'
+    compile group: 'org.ehcache', name: 'ehcache', version:'3.8.1'
+    compile group: 'org.webjars', name: 'webjars-locator-core', version:'0.45'
+    compile group: 'org.webjars', name: 'jquery', version:'2.2.4'
+    compile group: 'org.webjars', name: 'jquery-ui', version:'1.11.4'
+    compile group: 'org.webjars', name: 'bootstrap', version:'3.3.6'
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version:'2.3.5.RELEASE'
+    runtime group: 'com.h2database', name: 'h2', version:'1.4.200'
+    runtime(group: 'mysql', name: 'mysql-connector-java', version:'8.0.22') {
+exclude(module: 'protobuf-java')
+    }
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.3.5.RELEASE') {
+exclude(module: 'junit-vintage-engine')
+    }
+}
